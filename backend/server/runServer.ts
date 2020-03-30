@@ -4,7 +4,7 @@ import { getServer } from "./server";
 const PORT = 80;
 
 export async function runServer() {
-    const server = getServer();
+    const server: Server = getServer();
     server.listen(PORT, () => {
         console.log(`Сервер запустился на порту ${PORT}`);
     });
