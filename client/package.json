@@ -12,12 +12,17 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
+    "@types/react-relay": "^7.0.3",
+    "@types/relay-runtime": "^8.0.7",
     "@typescript-eslint/eslint-plugin": "^2.10.0",
     "@typescript-eslint/parser": "^2.10.0",
+    "antd": "^4.1.0",
     "babel-eslint": "10.1.0",
     "babel-jest": "^24.9.0",
     "babel-loader": "8.1.0",
+    "babel-plugin-import": "^1.13.0",
     "babel-plugin-named-asset-import": "^0.3.6",
+    "babel-plugin-relay": "^9.0.0",
     "babel-preset-react-app": "^9.1.2",
     "camelcase": "^5.3.1",
     "case-sensitive-paths-webpack-plugin": "2.3.0",
@@ -34,6 +39,7 @@
     "eslint-plugin-react-hooks": "^1.6.1",
     "file-loader": "4.3.0",
     "fs-extra": "^8.1.0",
+    "graphql": "^14.6.0",
     "html-webpack-plugin": "4.0.0-beta.11",
     "identity-obj-proxy": "3.0.0",
     "jest": "24.9.0",
@@ -41,6 +47,7 @@
     "jest-resolve": "24.9.0",
     "jest-watch-typeahead": "0.4.2",
     "mini-css-extract-plugin": "0.9.0",
+    "node-sass": "^4.13.1",
     "optimize-css-assets-webpack-plugin": "5.0.3",
     "pnp-webpack-plugin": "1.6.4",
     "postcss-flexbugs-fixes": "4.1.0",
@@ -52,6 +59,10 @@
     "react-app-polyfill": "^1.0.6",
     "react-dev-utils": "^10.2.1",
     "react-dom": "^16.13.1",
+    "react-relay": "0.0.0-experimental-8cc94ddc",
+    "relay-compiler": "^9.0.0",
+    "relay-compiler-language-typescript": "^12.0.0",
+    "relay-runtime": "^9.0.0",
     "resolve": "1.15.0",
     "resolve-url-loader": "3.1.1",
     "sass-loader": "8.0.2",
@@ -67,9 +78,10 @@
     "workbox-webpack-plugin": "4.3.1"
   },
   "scripts": {
-    "start": "node scripts/start.js",
+    "start": "npm run relay && SET PORT=1337 && node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "relay": "relay-compiler --schema ../schema.graphql --src ./src/ --language typescript"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -137,6 +149,20 @@
     ]
   },
   "babel": {
+    "plugins": [
+      [
+        "import",
+        {
+          "libraryName": "antd",
+          "libraryDirectory": "lib",
+          "style": "css"
+        },
+        "antd"
+      ],
+      [
+        "relay"
+      ]
+    ],
     "presets": [
       "react-app"
     ]
