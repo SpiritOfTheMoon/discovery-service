@@ -6,4 +6,4 @@ import { SystemResolver } from "./resolvers/SystemResolver";
 const resolvers: Array<Function | string> = [
     SystemResolver,
 ];
-export const schemaAP: GraphQLSchema = getSchema(resolvers);
+export const schemaAP: GraphQLSchema = getSchema(resolvers, "admin_point");
