@@ -9,10 +9,6 @@ export class SystemResolver {
     })
     public async systems(): Promise<System[]> {
         const systems: System[] = [];
-        systems.push({
-            uid: "2",
-            name: "2",
-        })
         return systems;
     }
 }
