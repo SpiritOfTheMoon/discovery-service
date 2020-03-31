@@ -3,8 +3,7 @@ import { Context } from "../objects/Context";
 import { ConfigEdge } from "../objects/edge/ConfigEdge";
 import DataLoader from "dataloader";
 
-
-export function serviceConfigsLoader(): MiddlewareFn<Context> {
+export function serviceConfigsLoaderMiddleware(): MiddlewareFn<Context> {
     return ({
         root,
         args,

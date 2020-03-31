@@ -1,8 +1,9 @@
 import "reflect-metadata";
-import { ObjectType, Field, Ctx } from "type-graphql";
+import { ObjectType, Field, Ctx, UseMiddleware } from "type-graphql";
 import { Context } from "./Context";
 import { ConfigConnection } from "./connection/ConfigConnection";
 import { ConfigEdge } from "./edge/ConfigEdge";
+import { serviceConfigsLoaderMiddleware } from "../middlewares/serviceConfigsLoaderMiddleware";
 
 @ObjectType()
 export class Service {
@@ -17,6 +18,7 @@ export class Service {
     })
     public name!: string;
 
+    @UseMiddleware(serviceConfigsLoaderMiddleware())
     @Field(() => ConfigConnection, {
         nullable: true,
     })
