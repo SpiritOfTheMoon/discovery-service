@@ -2,19 +2,20 @@ import "reflect-metadata";
 import { ObjectType, Field, Ctx } from "type-graphql";
 import { Context } from "./Context";
 import { ConfigConnection } from "./connection/ConfigConnection";
+import { ConfigEdge } from "./edge/ConfigEdge";
 
 @ObjectType()
 export class Service {
 
     @Field(() => String, {
-        nullable: true,
+        nullable: false,
     })
-    public uid: string | null = null;
+    public id!: string;
 
     @Field(() => String, {
-        nullable: true,
+        nullable: false,
     })
-    public name: string | null = null;
+    public name!: string;
 
     @Field(() => ConfigConnection, {
         nullable: true,
@@ -23,7 +24,8 @@ export class Service {
         @Ctx()
         context: Context,
     ): Promise<ConfigConnection> {
-        throw new Error("qq");
+        const edges: ConfigEdge[] = await context.serviceConfigsLoader.load(this.id);
+        throw new Error(`${edges}`);
     };
 
 }
