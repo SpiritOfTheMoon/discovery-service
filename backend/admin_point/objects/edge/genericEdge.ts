@@ -2,7 +2,7 @@ import "reflect-metadata";
 import { ClassType, ObjectType, Field } from "type-graphql";
 
 export function genericEdge<TItem>(TItemClass: ClassType<TItem>) {
-    @ObjectType({
+    @ObjectType(`${TItemClass.name}Edge`, {
         isAbstract: true,
     })
     abstract class Edge {
@@ -12,6 +12,14 @@ export function genericEdge<TItem>(TItemClass: ClassType<TItem>) {
         @Field(() => TItemClass, {
         })
         public node: TItem;
+
+        constructor(
+            cursor: string,
+            node: TItem,
+        ) {
+            this.cursor = cursor;
+            this.node = node;
+        }
     }
     return Edge;
 }
