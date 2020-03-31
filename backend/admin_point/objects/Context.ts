@@ -7,6 +7,5 @@ export class Context {
     constructor() {
         this.start = performance.now();
     }
-
-    public serviceConfigsLoader: DataLoader<string, ConfigEdge[]>;
+    public serviceConfigsLoader!: DataLoader<string, ConfigEdge[]>;
 }
